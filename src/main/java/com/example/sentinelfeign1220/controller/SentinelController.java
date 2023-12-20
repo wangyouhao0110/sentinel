@@ -23,20 +23,21 @@ public class SentinelController {
     }
 
     @ResponseBody
-    @GetMapping({"/zzz"})
-    @SentinelResource(value = "getClient", blockHandler = "checkGetClient")
-    public String client() throws InterruptedException {
-        Thread.sleep(3000);
-        log.info("调用：client方法");
-        return "success";
-    }
-
-    @ResponseBody
     @GetMapping({"/xxx"})
     @SentinelResource(value = "getClient2")
     public String client2() throws InterruptedException {
         Thread.sleep(3000);
         log.info("调用：client2方法");
+        return "success";
+    }
+    // client 和 checkGetClient(blockHandler = "checkGetClient) 必须在同一个类下
+    // 直接调取/zzz，会在sentinel页面看到
+    @ResponseBody
+    @GetMapping({"/zzz"})
+    @SentinelResource(value = "getClient", blockHandler = "checkGetClient")
+    public String client() throws InterruptedException {
+        Thread.sleep(3000);
+        log.info("调用：client方法");
         return "success";
     }
 
