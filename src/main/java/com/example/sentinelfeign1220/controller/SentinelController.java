@@ -30,6 +30,7 @@ public class SentinelController {
         log.info("调用：client2方法");
         return "success";
     }
+
     // client 和 checkGetClient(blockHandler = "checkGetClient) 必须在同一个类下
     // 直接调取/zzz，会在sentinel页面看到
     @ResponseBody
